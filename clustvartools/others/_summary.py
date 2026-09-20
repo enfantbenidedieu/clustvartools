@@ -61,7 +61,7 @@ def summary(obj,
         raise TypeError(f"Not allowed to an object of class {name}")
     
     # number of elements
-    nbelt = min(nbelt,obj.call_.X.shape[0])
+    nbelt = min(nbelt,obj.call_.X.shape[1])
 
     #---------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #
@@ -145,7 +145,7 @@ def summary(obj,
     # distance, dissimilarities, squared loadings
     #---------------------------------------------------------------------------------------------------------------------------------------------------------------------
     print(f"\n{text1}:")
-    data = data.head(nbelt).round(decimals=digits)
+    data = data.iloc[:nbelt,:].round(decimals=digits)
     if to_markdown: 
         data = data.to_markdown(tablefmt=tablefmt,**kwargs)
     print(data)
@@ -154,7 +154,7 @@ def summary(obj,
     # cluster members
     #---------------------------------------------------------------------------------------------------------------------------------------------------------------------
     print(f"\n{text2}:")
-    member = member.head(nbelt).round(decimals=digits)
+    member = member.iloc[:nbelt,:].round(decimals=digits)
     if to_markdown: 
         member = member.to_markdown(tablefmt=tablefmt,**kwargs)
     print(member)
@@ -177,13 +177,13 @@ def summary(obj,
             data2, member2 = obj.quanti_var_sup_.diss, obj.quanti_var_sup_.member
             
         print(f"\n{text1} - Supplementary variables:")
-        data2 = data2.head(nbelt).round(decimals=digits)
+        data2 = data2.iloc[:nbelt,:].round(decimals=digits)
         if to_markdown: 
             data2 = data2.to_markdown(tablefmt=tablefmt,**kwargs)
         print(data2)
         
         print(f"\n{text2} - Supplementary variables:")
-        member2 = member2.head(nbelt).round(decimals=digits)
+        member2 = member2.iloc[:nbelt,:].round(decimals=digits)
         if to_markdown: 
             member2 = member2.to_markdown(tablefmt=tablefmt,**kwargs)
         print(member2)
