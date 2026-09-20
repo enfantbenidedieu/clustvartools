@@ -6,7 +6,7 @@
 project = 'clustvartools'
 copyright = '2026, Duvérier DJIFACK ZEBAZE'
 author = 'Duvérier DJIFACK ZEBAZE'
-release = '0.0.1'
+release = '0.0.1.post1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
