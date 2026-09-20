@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 # Setting up
 setup(
     name = "clustvartools",
-    version = "0.0.1",
+    version = "0.0.1.post1",
     author = "Duverier DJIFACK ZEBAZE",
     author_email = "djifacklab@gmail.com",
     description = "Python library for clustering of variables",
