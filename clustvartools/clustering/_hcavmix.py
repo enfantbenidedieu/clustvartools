@@ -35,7 +35,7 @@ class HCAVmix(BaseEstimator,TransformerMixin):
     metric : callable, default = lambda x : sqrt(1 - x)
         Callable with input a float. This refers to how similarity matrix :math:`S` is converting into dissimilarity matrix :math:`D`.
 
-    linkage : {"average", "complete", "single", "ward"}, default = "average"
+    linkage : {"average", "complete", "single", "ward"}, default = "ward"
         Which linkage criterion to use. The linkage criterion determines which
         distance to use between sets of observation. The algorithm will merge
         the pairs of cluster that minimize this criterion.
@@ -110,7 +110,7 @@ class HCAVmix(BaseEstimator,TransformerMixin):
         self,
         ncl = 2,
         metric = lambda x : sqrt(1 - x),
-        linkage = "average",
+        linkage = "ward",
         sup_var = None
     ):
         self.ncl = ncl
@@ -179,11 +179,9 @@ class HCAVmix(BaseEstimator,TransformerMixin):
                     S.iloc[i,j] = eta2(categories=X[l],values=X[k])
                 elif not is_num1 and is_num2:
                     S.iloc[i,j] = eta2(categories=X[k],values=X[l])
+                S.iloc[j,i] = S.iloc[i,j]
         # compute dissimilary matrix
         D = S.transform(func=self.metric)
-        # replace diagonal with 0
-        for c in D.columns:
-            D.loc[c,c] = 0
         # linkage matrix with vectorize dissimilarity matrix
         Z = sch.linkage(squareform(D,checks=False),method=self.linkage)
 
@@ -214,7 +212,7 @@ class HCAVmix(BaseEstimator,TransformerMixin):
         call_ = {"Xtot":Xtot,"X":X,"ncl":ncl,"tree":tree,"sup_var":sup_var_label}
         #convert to namedtuple
         self.call_ = namedtuple("call",call_.keys())(*call_.values())
-
+        
         #---------------------------------------------------------------------------------------------------------------------------------------------------------------------
         # Informations for levels
         #---------------------------------------------------------------------------------------------------------------------------------------------------------------------

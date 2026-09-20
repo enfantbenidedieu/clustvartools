@@ -178,9 +178,6 @@ class HCAV(BaseEstimator,TransformerMixin):
         S = X.corr(method=self.method)
         # compute dissimilary matrix
         D = S.transform(func=self.metric)
-        # replace diagonal with 0
-        for c in D.columns:
-            D.loc[c,c] = 0
         # linkage matrix with vectorize dissimilarity matrix
         Z = sch.linkage(squareform(D,checks=False),method=self.linkage)
 
