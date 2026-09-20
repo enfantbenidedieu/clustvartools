@@ -86,7 +86,7 @@ In order to check your installation, you can use.
 ```python
 >>> import clustvartools
 >>> print(clustvartools.__version__)
-0.0.1
+0.0.1.post1
 ```
 
 Using an isolated environment such as *pip venv* or *conda* makes it possible to install a specific version of clustvartools with pip and conda and its dependencies independently of any previously installed Python packages.
